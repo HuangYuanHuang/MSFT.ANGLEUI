@@ -1,0 +1,48 @@
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding':'0px'}" [nzMaskClosable]="true"
+  [nzWidth]="320" [nzVisible]="visible" (nzOnClose)="close()">
+  <h3 class="text-center text-thin mt-4">{{'offsidebar.setting.Follow' | translate}}</h3>
+  <div style="margin:0 auto;width:50px;margin-top: 100px" *ngIf="!isLoad">
+    <nz-spin [nzSize]="'large'"></nz-spin>
+
+  </div>
+  <div class="list-group">
+    <ng-template ngFor let-item [ngForOf]="followNodes" let-mainMenuItemIndex="index">
+      <div class="list-group-item list-group-item-action border-0">
+        <div class="media">
+
+          <ng-template [ngIf]="item.user.icon">
+            <img class="align-self-center mr-3 rounded-circle thumb48" [src]="item.user.icon" alt="Image">
+
+          </ng-template>
+          <ng-template [ngIf]="!item.user.icon">
+            <img class="align-self-center mr-3 rounded-circle thumb48" src="assets/img/user/01.jpg" alt="Image">
+
+          </ng-template>
+          <div class="media-body text-truncate">
+            <a href="#">
+              <strong>{{item.user.fullName}}</strong>
+            </a>
+            <br>
+            <small class="text-muted">{{item.user.roleNames[0]}}</small> <br>
+            <small class="text-muted">{{item.createTime| amLocal | amDateFormat: 'MM-DD HH:mm'}}</small>
+          </div>
+          <div class="ml-auto">
+            <ng-template [ngIf]="!item.isFollow">
+              <button nz-button class="btn btn-success btn-oval" [nzLoading]="item.isSave" (click)="follow(item)">{{'Followers.Follow'
+                | translate}}</button>
+            </ng-template>
+
+            <ng-template [ngIf]="item.isFollow">
+              <button nz-button class="btn btn-info btn-oval" disabled>{{'Followers.Following' |translate}}</button>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+
+    </ng-template>
+
+
+  </div>
+
+</nz-drawer>

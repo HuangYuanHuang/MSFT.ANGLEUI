@@ -1,0 +1,19 @@
+<div class="wrapper" *ngIf="loadFinished">
+    <!-- top navbar-->
+    <app-header class="topnavbar-wrapper"></app-header>
+    <!-- sidebar-->
+    <app-sidebar class="aside-container"></app-sidebar>
+    <!-- offsidebar-->
+    <app-offsidebar></app-offsidebar>
+    <app-follow-sidebar></app-follow-sidebar>
+    <app-media></app-media>
+    <!-- Main section-->
+    <section class="section-container">
+        <!-- Page content-->
+        <div class="content-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </section>
+    <!-- Page footer-->
+    <footer class="footer-container" app-footer></footer>
+</div>

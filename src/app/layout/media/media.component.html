@@ -1,0 +1,117 @@
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding':'0px'}" [nzMaskClosable]="false"
+    [nzWidth]="420" [nzVisible]="visible" nzTitle="{{'Chat.MediaChat'|translate}}" (nzOnClose)="close()">
+    <audio *ngIf="inTheCall" loop="loop" src="/assets/begin.mp3" autoplay>
+
+    </audio>
+    <ng-template [ngIf]="videoChat">
+        <div class="media-main">
+
+            <div class="media-image" [ngStyle]="audioStyle()">
+
+            </div>
+            <div class="media-bg">
+
+            </div>
+            <div class="media-remote" *ngIf="remoteVideoNode">
+                <div class="remote-play" id="{{remoteVideoNode.getStreamId()}}">
+
+                </div>
+            </div>
+            <div class="media-top">
+
+                <div class="video-play " *ngIf="localVideoNode" id="{{localVideoNode.getStreamId()}}">
+
+                </div>
+                <div class="video-operation">
+                    <p>
+                        <img [src]="currentChatUser.icon" alt="Image">
+                        <!-- <img src="https://unescoedu.hyhrobot.com:5200/static-image/Icon/bdcad313-8b20-4f2d-8291-c0c512cd683b.jpg"
+                                    alt=""> -->
+                    </p>
+
+                    <div class="magin-top">
+                        <p>
+                            <strong>
+                                <h3>{{currentChatUser.fullName}}</h3>
+                            </strong>
+                        </p>
+                    </div>
+                    <p *ngIf="chatStatus==0">
+                        {{'Chat.Waitforinvitation'| translate}}
+                    </p>
+                    <p *ngIf="chatStatus==2">{{'Chat.Inthecall'| translate}}</p>
+                    <p *ngIf="chatStatus==2">{{durnTime | amDateFormat: 'HH:mm:ss' }}</p>
+                    <div class="magin-button">
+                        <p *ngIf="localVideoNode" class="opera-btn">
+                            <button nzSize="large" *ngIf="chatStatus==2" nz-button nzType="default" nzShape="circle"
+                                (click)="playVideo()" [ngClass]="localVideoNode.videoBtnClass">
+                                <i class="fas" [ngClass]="localVideoNode.videoIonClass"></i>
+                            </button>
+                            <button nzSize="large" *ngIf="chatStatus==2" nz-button nzType="default" nzShape="circle"
+                                (click)="playAudio()" [ngClass]="localVideoNode.audioBtnClass">
+                                <i class="fas " [ngClass]="localVideoNode.audioIonClass"></i>
+                            </button>
+                            <button nzSize="large" nz-button nzType="danger" nzShape="circle" class="closeBtn btn-danger"
+                                (click)="closeMedia()"><i class="fas fa-phone"></i></button>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </ng-template>
+
+    <ng-template [ngIf]="!videoChat">
+        <div class="media-main">
+            <div class="media-image" [ngStyle]="audioStyle()">
+
+            </div>
+            <div class="media-bg"></div>
+            <div class="media-top">
+                <div *ngIf="remoteVideoNode" id="{{remoteVideoNode.getStreamId()}}">
+
+                </div>
+                <div *ngIf="localVideoNode" id="{{localVideoNode.getStreamId()}}">
+                   
+                </div>
+                <div class="video-audio-operation">
+                    <p>
+                        <img [src]="currentChatUser.icon" alt="Image">
+                        <!-- <img src="https://unescoedu.hyhrobot.com:5200/static-image/Icon/bdcad313-8b20-4f2d-8291-c0c512cd683b.jpg"
+                                    alt=""> -->
+                    </p>
+                    <div class="magin-top">
+                        <p>
+                            <strong>
+                                <h3>{{currentChatUser.fullName}}</h3>
+                            </strong>
+                        </p>
+                    </div>
+
+                    <p  *ngIf="chatStatus==0">{{'Chat.Waitforinvitation'| translate}}</p>
+                    <p *ngIf="chatStatus==2">{{'Chat.Inthecall'| translate}}</p>
+                    <p *ngIf="chatStatus==2">{{durnTime | amDateFormat: 'HH:mm:ss' }}</p>
+                    <div class="magin-button">
+                        <p *ngIf="localVideoNode" class="opera-btn">
+
+                            <button nzSize="large" *ngIf="chatStatus==2" nz-button nzType="default" nzShape="circle"
+                                (click)="playAudio()" [ngClass]="localVideoNode.audioBtnClass">
+                                <i class="fas " [ngClass]="localVideoNode.audioIonClass"></i>
+                            </button>
+                            <button nzSize="large" nz-button nzType="danger" class="closeBtn  btn-danger" nzShape="circle"
+                                (click)="closeMedia()"><i class="fas fa-phone"></i></button>
+
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </ng-template>
+</nz-drawer>

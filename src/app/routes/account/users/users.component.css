@@ -1,0 +1,8 @@
+.cdk-overlay-pane {
+    z-index: 1051 !important;
+}
+
+.card-top-button button {
+    margin-left: 5px;
+    margin-right: 5px;
+}

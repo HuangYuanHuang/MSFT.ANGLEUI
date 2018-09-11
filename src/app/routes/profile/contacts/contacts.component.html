@@ -1,0 +1,37 @@
+<div class="content-heading">
+    {{'Contacts.Head' | translate}}
+</div>
+<div class="row" infinite-scroll [infiniteScrollDistance]="1" (scrolled)="onScrollDown()">
+    <div class="col-xl-4 col-lg-6" *ngFor="let item of userNodes">
+        <div class="card card-default">
+            <div class="card-header">
+                <!-- <a class="float-right text-muted" (click)="favContact1=!favContact1">
+                    <em class="fa" [ngClass]="favContact1 ? 'fa-star text-warning' : 'fa-star-o'"></em>
+                </a> -->
+            </div>
+            <div class="card-body text-center">
+                <ng-template [ngIf]="item.icon">
+                    <img class="mb-2 img-fluid rounded-circle thumb64" [src]="item.icon" alt="Contact">
+
+                </ng-template>
+                <ng-template [ngIf]="!item.icon">
+                    <img class="mb-2 img-fluid rounded-circle thumb64" src="assets/img/user/01.jpg" alt="Image">
+
+                </ng-template>
+                <h4>{{item.fullName}}</h4>
+                <p *ngIf="item.mark">{{item.mark}}</p>
+                <p *ngIf="!item.mark"> {{'Contacts.NoRole' | translate}}</p>
+            </div>
+            <div class="card-footer d-flex">
+                <div>
+                    <button type="button" class="btn btn-xs btn-primary" (click)="sendMessage(item)">{{'Contacts.Message'
+                        | translate}}</button>
+                </div>
+                <div class="ml-auto">
+                    <button type="button" class="btn btn-xs btn-secondary">{{'Contacts.View' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

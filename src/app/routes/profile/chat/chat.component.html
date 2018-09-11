@@ -1,0 +1,15 @@
+<div class="content-heading">  {{'Chat.Head' | translate}}</div>
+
+<div class="row chat-wrapper">
+  <div class="w-360" style="width:350px">
+    <app-chat-list #chatlist (currentChatEvent)="currentChatEvent($event)"></app-chat-list>
+
+  </div>
+  <div class="col">
+    <app-chat-panel *ngIf="currentUser" #chatpanel></app-chat-panel>
+
+  </div>
+  <div class="md-3" style="width:350px">
+    <app-chat-info *ngIf="currentUser" #chatInfo></app-chat-info>
+  </div>
+</div>

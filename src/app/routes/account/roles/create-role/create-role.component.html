@@ -1,0 +1,55 @@
+﻿<nz-modal [(nzVisible)]="isVisible" [nzFooter]="null" nzTitle="Add Role" [nzWidth]="800" (nzOnCancel)="handleCancel()">
+    <form *ngIf="role" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+        <nz-tabset>
+            <nz-tab nzTitle="Role Details">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="roleName">RoleName</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="roleName" placeholder="RoleName" [(ngModel)]="role.name">
+                        <nz-form-explain *ngIf="validateForm.get('roleName').dirty && validateForm.get('roleName').errors">Please
+                            input RoleName!</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="displayName">DisplayName</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="displayName" placeholder="DisplayName" [(ngModel)]="role.displayName">
+                        <nz-form-explain *ngIf="validateForm.get('displayName').dirty && validateForm.get('displayName').errors">Please
+                            input DisplayName!</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description">Role Description</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <textarea formControlName="description" nz-input rows="2" placeholder="Role Description"
+                            [(ngModel)]="role.description"></textarea>
+
+                    </nz-form-control>
+                </nz-form-item>
+            </nz-tab>
+            <nz-tab nzTitle="Page Permissions">
+                <nz-tree #nzTree [(ngModel)]="nodes" formControlName="permissionTree"  [nzCheckable]="true" [nzDefaultExpandAll]="true"
+                    (nzCheckBoxChange)="mouseAction('click',$event)">
+                </nz-tree>
+
+            </nz-tab>
+            <nz-tab nzTitle="Operation Permissions">
+                <nz-tree #nzOperationTree [(ngModel)]="operationNodes" formControlName="operationTree" [nzCheckable]="true"
+                    [nzDefaultExpandAll]="true">
+                </nz-tree>
+            </nz-tab>
+
+        </nz-tabset>
+
+        <div class="modal-footer">
+            <button nz-button [disabled]="saving" type="button" (click)="handleCancel()"> {{l("Cancel")}}</button>
+            <button nz-button nzType="primary" [disabled]="!validateForm.valid || saving"> {{l("Save")}}</button>
+
+        </div>
+    </form>
+
+</nz-modal>
+
+
+
+

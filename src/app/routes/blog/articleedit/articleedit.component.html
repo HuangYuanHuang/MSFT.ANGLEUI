@@ -1,0 +1,71 @@
+<div class="content-heading">New Article</div>
+<div class="container-fluid">
+    <alert type="info">
+        <em class="fa fa-exclamation-circle fa-lg fa-fw"></em>
+        <span>There is an autosaved version of this article that is more recent than the version below.
+            <a href="#" class="text-white">Restore</a>
+        </span>
+    </alert>
+    <div class="row">
+        <!-- Article Content-->
+        <div class="col-xl-9">
+            <div class="card card-default">
+                <div class="card-body">
+                    <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="loginForm" novalidate="" (submit)="submitForm($event, valForm.value)">
+                        <input class="mb-3 form-control form-control-lg" [(ngModel)]="newInfo.title" formControlName="article-title" type="text" name="article-title" placeholder="Article title..."
+                        />
+                        <!-- Wysiswyg editor-->
+                        <div id="summernote" class="summernote">
+                            <span></span>
+                        </div>
+                        <br/>
+                        <p>Notes</p>
+                        <textarea class="mb-3 form-control" cols="6" [(ngModel)]="newInfo.notes" formControlName="article-notes"></textarea>
+                        <!-- <p>Image</p>
+                        <app-cropper #cropper></app-cropper> -->
+                        <div class="clearfix">
+                            <div class="float-left">
+
+                                <button class="btn btn-primary" type="submit">
+                                    <em class="fa fa-check fa-fw"></em>Save</button>
+                            </div>
+                            <!-- <div class="float-right">
+                                <button class="btn btn-danger" type="button">
+                                    <em class="fas fa-trash-alt fa-fw"></em>Remove</button>
+                            </div> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- Article sidebar-->
+        <div class="col-xl-3">
+            <div class="card card-default">
+                <div class="card-body">
+                    <p class="lead">Article Data</p>
+                    <p class="my-2">Categories</p>
+                    <ngx-select [(ngModel)]="categories" name="categories" [multiple]="true" [items]="itemsCategories"></ngx-select>
+                    <p class="my-2">Tags</p>
+                    <tag-input theme='minimal' name="tagName2" [(ngModel)]="tags" [maxItems]="3"></tag-input>
+
+                    <!-- <ngx-select [(ngModel)]="tags" name="tags" [multiple]="true" [items]="itemsTags"></ngx-select> -->
+
+                    <p class="lead mt-3">SEO Metadata</p>
+                    <div class="form-group">
+                        <p>Title</p>
+                        <input class="form-control" type="text" placeholder="Brief description.." [(ngModel)]="newInfo.seoTitle" name="article-seoTitle"/>
+                    </div>
+                    <div class="form-group">
+                        <p>Description</p>
+                        <textarea class="form-control" rows="5" placeholder="Max 255 characters..." [(ngModel)]="newInfo.seoDescription" name="article-seoDescription"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <p>Keywords</p>
+                        <textarea class="form-control" rows="5" placeholder="Max 1000 characters..." [(ngModel)]="newInfo.keywords" name="article-keywords"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

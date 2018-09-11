@@ -1,0 +1,84 @@
+<div class="content-heading">{{'News.Articles' | translate}}</div>
+<!-- Zero Configuration-->
+<div class="card card-default" [@routerTransition]>
+    <div class="card-body">
+        <div style="text-align:right" class="card-top-button">
+            <ng-template [ngIf]="isTableLoading">
+                <button nz-button nzLoading nzType="primary" nzShape="circle"></button>
+            </ng-template>
+
+            <button nz-button nzType="default" (click)="refresh();"><i class="anticon anticon-sync"></i>{{'Base.Refresh'|translate}}</button>
+          
+
+        </div>
+        <div class="table-responsive">
+            <table datatable="" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="wd-md">{{'News.Title' | translate}}</th>
+                        <th>{{'News.Categories' | translate}}</th>
+                        <th>{{'News.Tags' | translate}}</th>
+                        <th>{{'News.Author' | translate}}</th>
+                        <th>{{'News.CreatedRole' | translate}}</th>
+                        <th>{{'News.CreationTime' | translate}}</th>
+                        <!-- <th>{{'News.Comments' | translate}}</th> -->
+                        <th>{{'News.Status' | translate}}</th>
+                        <th>{{'News.Actions' | translate}}</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let item of news | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
+                        <td>
+                            <a href="javascript:(void)" (click)="linkArticle(item)"> {{item.title}}</a>
+                        </td>
+                        <td>
+                            {{item.type}}
+                        </td>
+
+                        <td>
+                            <a class="mr-1 badge badge-primary" *ngFor="let tag of getTags(item)" href="javascript:void(0)">{{tag}}</a>
+
+
+                        </td>
+                        <td>{{item.creationUserName}}</td>
+                        <td>{{item.creationRole}}</td>
+                        <td>{{item.creationTime | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm'}}</td>
+                        <!-- <td>1251</td> -->
+                        <td>
+                            <a class="mr-1 badge badge-info" *ngIf="item.status==1" href="javascript:void(0)">Pending</a>
+                            <a class="mr-1 badge badge-danger" *ngIf="item.status==0" href="javascript:void(0)">Reject</a>
+
+                            <a class="mr-1 badge badge-success" *ngIf="item.status==2" href="javascript:void(0)">Public</a>
+
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-secondary" type="button" (click)="editNew(item)" *ngIf="isGranted('Pages.Blogs.Edit')">
+                                <em class="fas fa-pencil-alt"></em>
+                            </button>
+                            <button class="btn btn-sm btn-danger" (click)="delete(item)" type="button" *ngIf="isGranted('Pages.Blogs.Delete')">
+                                <em class="fas fa-trash-alt"></em>
+                            </button>
+                            <button class="btn btn-sm btn-info" type="button" (click)="change(item,0,'Reject')" *ngIf="isGranted('Pages.Blogs.Examine')&&item.status!=2">
+
+                                <em class="fas fa-window-close"></em>
+                            </button>
+                            <button class="btn btn-sm btn-success" type="button" (click)="change(item,2,'Public')"
+                                *ngIf="isGranted('Pages.Blogs.Examine')&&item.status!=2">
+
+                                <em class="fa fa-check"></em>
+                            </button>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="text-align: center;" *ngIf="totalItems > pageSize">
+
+                <pagination-controls style="text-align:center" (pageChange)="getDataPage($event)" id="server"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<nz-modal [(nzVisible)]="isVisible" [nzFooter]="null" nzTitle="Add AspAccount" [nzWidth]="800" (nzOnCancel)="handleCancel()">
+  <form *ngIf="account" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="firstName">FirstName</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input type="text" nz-input formControlName="firstName" placeholder="FirstName" [(ngModel)]="account.surname" (ngModelChange)="onChange()">
+        <nz-form-explain *ngIf="validateForm.get('firstName').dirty && validateForm.get('firstName').errors">Please input FirstName!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="lastName">LastName</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input type="text" nz-input formControlName="lastName" placeholder="LastName" [(ngModel)]="account.name" (ngModelChange)="onChange()">
+        <nz-form-explain *ngIf="validateForm.get('lastName').dirty && validateForm.get('lastName').errors">Please input LastName!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="displayName">DisplayName</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input type="text" nz-input formControlName="displayName" placeholder="DisplayName" [(ngModel)]="account.fullName">
+        <nz-form-explain *ngIf="validateForm.get('displayName').dirty && validateForm.get('displayName').errors">Please input DisplayName!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input type="email" nz-input formControlName="email" placeholder="Email" [(ngModel)]="account.emailAddress">
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="account.mark=='School Coordinator'">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="schoolName">SchoolName</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input type="text" nz-input formControlName="schoolName" placeholder="schoolName" [(ngModel)]="account.schoolName">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isAcitve">IsAcitve</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-switch formControlName="isAcitve" [(ngModel)]="account.isActive"></nz-switch>
+
+      </nz-form-control>
+    </nz-form-item>
+    <div class="modal-footer">
+      <button nz-button [disabled]="saving" type="button" (click)="handleCancel()"> {{l("Cancel")}}</button>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid"> {{l("Save")}}</button>
+
+    </div>
+  </form>
+
+</nz-modal>

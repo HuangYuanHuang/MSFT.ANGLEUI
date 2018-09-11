@@ -1,0 +1,142 @@
+<div class="row">
+    <!-- Blog Content-->
+    <div class="col-xl-9">
+        <div style="margin:0 auto;width:50px;margin-top: 300px" *ngIf="!isLoad">
+            <nz-spin [nzSize]="'large'"></nz-spin>
+
+        </div>
+
+
+        <div class="card-columns" infinite-scroll [infiniteScrollDistance]="1" (scrolled)="onScrollDown()"
+            [infiniteScrollDisabled]="isLoadFinished">
+            <ng-template ngFor let-item [ngForOf]="news" let-itemIndex="index">
+                <ng-template [ngIf]="item.thumbnail">
+                    <div class="card">
+                        <a href="#">
+                            <img class="img-fluid" [src]="getImageUrl(item)" />
+                        </a>
+                        <div class="card-body">
+                            <p class="d-flex">
+                                <span>
+                                    <small class="mr-1">
+                                        <a class="ml-1" href="#">{{item.creationUserName}}</a>
+                                    </small>
+                                    <small class="mr-1">{{item.creationTime | amLocal | amDateFormat: 'YYYY-MM-DD
+                                        HH:mm'}}</small>
+                                </span>
+
+                            </p>
+                            <h4>
+                                <a href="#" [routerLink]="['/blog/post', item.id]">{{item.title}}</a>
+                            </h4>
+                            <p>{{item.notes}}</p>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template [ngIf]="!item.thumbnail">
+                    <div class="card">
+                        <div class="card-body " [ngClass]="item.context">
+                            <h3 class="my-3"> <a href="#" style="color:white" [routerLink]="['/blog/post', item.id]">{{item.title}}</a></h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="d-flex">
+                                <span>
+                                    <small class="mr-1">
+                                        <a class="ml-1" href="#">{{item.creationUserName}}</a>
+                                    </small>
+                                    <small class="mr-1">{{item.creationTime | amLocal | amDateFormat: 'YYYY-MM-DD
+                                        HH:mm'}}</small>
+                                </span>
+
+                            </p>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-template>
+
+
+        </div>
+    </div>
+    <!-- Blog Sidebar-->
+    <!-- Blog Sidebar-->
+    <div class="col-xl-3">
+        <div class="row">
+            <div class="col-12">
+                <!-- Search-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.Search' | translate}}</div>
+                    <div class="card-body">
+                        <form class="form-horizontal">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="{{'News.Search' | translate}}" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button">
+                                        <em class="fa fa-search"></em>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xl-12">
+                <!-- Categories-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.Categories' | translate}}</div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0)" (click)="reRefresh('')">
+                                    <em class="fa fa-angle-right fa-fw"></em>All</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="reRefresh('Top story')">
+                                    <em class="fa fa-angle-right fa-fw"></em>Top story</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="reRefresh('News')">
+                                    <em class="fa fa-angle-right fa-fw"></em>News</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="reRefresh('Mark your Agenda')">
+                                    <em class="fa fa-angle-right fa-fw"></em>Mark your Agenda</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="reRefresh('Arts Contest')">
+                                    <em class="fa fa-angle-right fa-fw"></em>Arts Contest</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="reRefresh('Schools Celebrating')">
+                                    <em class="fa fa-angle-right fa-fw"></em>Schools Celebrating</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="reRefresh('Essential Reading')">
+                                    <em class="fa fa-angle-right fa-fw"></em>Essential Reading</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xl-12">
+                <!-- Tag Cloud-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.TagCloud' | translate}}</div>
+                    <div class="card-body">
+                        <div jqcloud class="mw-100" [words]="words" [width]="240" [height]="200" [steps]="7"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xl-12">
+                <!-- Ads-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.Ads' | translate}}</div>
+                    <div class="card-body">
+                        <a href="">
+                            <img class="img-fluid img-thumbnail" src="assets/img/mockup.png" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

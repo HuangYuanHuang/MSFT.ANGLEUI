@@ -1,0 +1,104 @@
+<div class="content-heading">{{'Followers.Head' | translate}}</div>
+<div class="row">
+    <!-- Aside card-->
+    <div class="col-xl-3 col-lg-4">
+        <div class="card b text-center">
+            <div class="card-body">
+                <p class="h4 text-bold mb-0">{{'Followers.ThisYou' | translate}}</p>
+            </div>
+            <div class="card-body" *ngIf="currentUser">
+                <img alt="" class="rounded-circle thumb64 mb-2" *ngIf="!currentUser.icon" src="/assets/img/user/01.jpg">
+                <img alt="" class="rounded-circle thumb64 mb-2" *ngIf="currentUser.icon" [src]="currentUser.icon">
+                <p class="h4 text-bold mb-0">{{currentUser.fullName}}</p>
+                <p>{{getTransString(currentUser.country)}}</p>
+            </div>
+            <div class="card-body bt">
+                <div class="row">
+                    <div class="col-4 br">
+                        <em class="fab fa-facebook-f fa-fw text-primary"></em>
+                        <strong>+700</strong>
+                    </div>
+                    <div class="col-4 br">
+                        <em class="fab fa-twitter fa-fw text-info"></em>
+                        <strong>+300</strong>
+                    </div>
+                    <div class="col-4">
+                        <em class="fa fa-heart fa-fw text-danger"></em>
+                        <strong>+150</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card b">
+            <div class="card-header">
+                <div class="media align-items-center">
+                    <div class="media-body">
+                        <input class="form-control chat-search my-3" placeholder="{{'Followers.Search' | translate}}"
+                            type="text" [(ngModel)]="countrySearch" name="countrySearch">
+                    </div>
+                    <a class="chat-sidebox-toggler d-lg-none d-block text-muted text-large font-weight-light pl-3" href="javascript:void(0)">×</a>
+                </div>
+                <hr class="border-light m-0">
+            </div>
+            <div class="card-body" id="countryPanel" style="height:350px;overflow-y: auto;">
+                <div class="media align-items-center" *ngFor="let item of countryNodes | countryPipe:countrySearch">
+                    <!-- <a class="mr-2" href="#">
+                        <img class="rounded-circle img-thumbnail thumb48" src="assets/img/user/04.jpg" alt="Contact" />
+                    </a> -->
+                    <div class="media-body pt-1">
+                        <div class="float-right">
+                            <button class="btn btn-secondary btn-sm" type="button" (click)="getUserByCountry(item.country)">{{'Followers.View'
+                                | translate}}</button>
+                        </div>
+                        <div class="text-bold"> {{getTransText(item)}}
+                            <div class="text-sm text-muted">{{item.count}} {{'Followers.Persons' | translate}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end Aside card-->
+    <!-- Main cards-->
+
+    <div class="col-xl-9 col-lg-8">
+        <div style="margin:0 auto;width:50px;margin-top: 300px" *ngIf="!isLoad">
+            <nz-spin [nzSize]="'large'"></nz-spin>
+
+        </div>
+        <div class="row" infinite-scroll [infiniteScrollDistance]="1" (scrolled)="onScrollDown()"
+            [infiniteScrollDisabled]="isLoadFinished">
+
+            <ng-template ngFor let-item [ngForOf]="userNodes" let-mainMenuItemIndex="index">
+                <div class="col-xl-4 col-lg-6" *ngIf="isLoad">
+                    <div class="card b text-center">
+                        <div class="card-body">
+                            <img alt="" class="rounded-circle thumb64 mb-2" *ngIf="!item.user.icon" src="/assets/img/user/01.jpg">
+                            <img alt="" class="rounded-circle thumb64 mb-2" *ngIf="item.user.icon" [src]="item.user.icon">
+                            <p class="h4 text-bold mb-0">{{item.user.fullName}}</p>
+                            <p *ngIf="item.user.roleNames">{{item.user.roleNames[0]}}</p>
+                            <p *ngIf="item.user.roleNames">{{getTransString(country)}}</p>
+                            <button *ngIf="item.user.id==selfId" class="btn btn-danger btn-oval" type="button" disabled>{{'Followers.Self'
+                                | translate}}</button>
+
+                            <button *ngIf="!item.isFollow&&item.user.id!=selfId" nz-button class="btn btn-success btn-oval"
+                                [nzLoading]="item.isSave" (click)="follow(item)">{{'Followers.Follow' | translate}}</button>
+
+                            <button *ngIf="item.isFollow&&item.user.id!=selfId" nz-button class="btn btn-info btn-oval"
+                                [nzLoading]="item.isSave" (click)="follow(item)">{{'Followers.Following' | translate}}</button>
+
+                            <!-- <button *ngIf="!item.isFollow&&item.user.id!=selfId" class="btn btn-success btn-oval" type="button"
+                                (click)="follow(item)">{{'Followers.Follow' | translate}}</button>
+                            <button *ngIf="item.isFollow&&item.user.id!=selfId" class="btn btn-info  btn-oval" type="button"
+                                (click)="follow(item)">{{'Followers.Following' | translate}}</button> -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <!-- end Main cards-->
+</div>

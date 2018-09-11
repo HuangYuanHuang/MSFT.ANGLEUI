@@ -1,0 +1,32 @@
+<div class="card" style="height:752px">
+    <div class="half-float">
+        <img class="img-fluid" src="assets/img/bg3.jpg" alt="">
+        <div class="half-float-bottom" *ngIf="currentUser.icon">
+            <img class="img-thumbnail circle thumb128" [src]="currentUser.icon" alt="Image">
+        </div>
+        <div class="half-float-bottom" *ngIf="!currentUser.icon">
+            <img class="img-thumbnail circle thumb128" src="assets/img/user/01.jpg" alt="Image">
+        </div>
+    </div>
+    <div class="card-body text-center">
+        <h3 class="m-0">{{currentUser.fullName}}</h3>
+        <p class="text-muted">{{getTransString(currentUser.country)}}</p>
+        <p>{{currentUser.bio}}</p>
+    </div>
+    <!-- <div class="card-body text-center bg-gray-dark">
+      <div class="row">
+          <div class="col-4">
+              <h3 class="m-0">400</h3>
+              <p class="m-0">Photos</p>
+          </div>
+          <div class="col-4">
+              <h3 class="m-0">2000</h3>
+              <p class="m-0">Likes</p>
+          </div>
+          <div class="col-4">
+              <h3 class="m-0">500</h3>
+              <p class="m-0">Following</p>
+          </div>
+      </div>
+  </div> -->
+</div>

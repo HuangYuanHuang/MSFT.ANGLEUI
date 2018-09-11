@@ -1,0 +1,73 @@
+.chat-search {
+    border-radius: 10rem;
+}
+
+.border-light {
+    border-color: rgba(24, 28, 33, 0.06) !important;
+}
+
+.chat-wrapper {
+    background-color: white;
+}
+
+.px-4 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+}
+
+.chat-contacts .list-group-item {
+    z-index: auto !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding: .625rem;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+}
+
+.ui-w-40 {
+    width: 40px !important;
+    height: auto;
+}
+
+.badge.badge-dot {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: .5em;
+    height: .5em;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chat-contacts .list-group-item.active .chat-status .badge {
+    background: #fff !important;
+}
+
+.chat-contacts .list-group-item.online .chat-status .badge {
+    background: #02bc77;
+}
+
+.chat-contacts .list-group-item .chat-status .badge {
+    background: #d9534f;
+}
+
+.badge-outline-success {
+    background-color: transparent;
+    -webkit-box-shadow: 0 0 0 1px #02BC77 inset;
+    box-shadow: 0 0 0 1px #02BC77 inset;
+    color: #02BC77;
+}
+
+.chat-contacts .list-group-item:not(.online) {
+    opacity: .7;
+}

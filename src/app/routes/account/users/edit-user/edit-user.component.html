@@ -1,0 +1,80 @@
+﻿<nz-modal [(nzVisible)]="isVisible" [nzFooter]="null" nzTitle="Edit User" [nzWidth]="800" (nzOnCancel)="handleCancel()">
+    <form *ngIf="user" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+        <nz-tabset>
+            <nz-tab nzTitle="User Details">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userName">UserName</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="userName" placeholder="UserName" [(ngModel)]="user.userName">
+                        <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Please
+                            input userName!</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="firstName">FirstName</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="firstName" placeholder="FirstName" [(ngModel)]="user.name">
+                        <nz-form-explain *ngIf="validateForm.get('firstName').dirty && validateForm.get('firstName').errors">Please
+                            input FirstName!</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="lastName">LastName</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="text" nz-input formControlName="lastName" placeholder="LastName" [(ngModel)]="user.surname">
+                        <nz-form-explain *ngIf="validateForm.get('lastName').dirty && validateForm.get('lastName').errors">Please
+                            input LastName!</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">EmailAddress</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <input type="email" nz-input formControlName="email" placeholder="Email" [(ngModel)]="user.emailAddress">
+                        <nz-form-explain *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">Please
+                            input EmailAddress!</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="country">Country</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select formControlName="country" nzShowSearch nzAllowClear nzPlaceHolder="Select a Country"
+                            [(ngModel)]="user.country">
+                            <nz-option *ngFor="let item of countryNodes" nzLabel="{{item.en}}" nzValue="{{item.code}}"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="isAcitve">IsAcitve</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-switch formControlName="isAcitve" [(ngModel)]="user.isActive"></nz-switch>
+
+                    </nz-form-control>
+                </nz-form-item>
+
+            </nz-tab>
+            <nz-tab nzTitle="User Roles">
+                <div class="row">
+                    <div class="col-sm-12" class="div-roles" style="margin-left:20px">
+                        <ng-template ngFor let-role [ngForOf]="roles" let-roleIndex="index">
+                            <div class="checkbox c-checkbox"><label><input name="role" type="checkbox" value="{{role.normalizedName}}"
+                                        title="{{role.description}}" id="role-{{roleIndex}}" checked="{{userInRole(role,user)}}"><span
+                                        class="fa fa-check"></span>{{role.name}}
+                                </label></div>
+                        </ng-template>
+                    </div>
+                </div>
+            </nz-tab>
+
+        </nz-tabset>
+
+        <div class="modal-footer">
+            <button nz-button [disabled]="saving" type="button" (click)="handleCancel()"> {{l("Cancel")}}</button>
+            <button nz-button nzType="primary" [disabled]="!validateForm.valid || saving"> {{l("Save")}}</button>
+
+        </div>
+    </form>
+
+</nz-modal>
+
+

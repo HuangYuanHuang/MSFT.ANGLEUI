@@ -1,0 +1,53 @@
+<div class="chat-sidebox col">
+
+
+  <div class="flex-grow-0 px-4">
+    <div class="media align-items-center">
+      <div class="media-body">
+        <input class="form-control chat-search my-3" [(ngModel)]="selectName" name="selectName" placeholder="{{'Chat.Search' | translate}}"
+          type="text">
+      </div>
+      <a class="chat-sidebox-toggler d-lg-none d-block text-muted text-large font-weight-light pl-3" href="javascript:void(0)">×</a>
+    </div>
+    <hr class="border-light m-0">
+  </div>
+
+
+
+  <div class="flex-grow-1 position-relative">
+    <div class="chat-contacts list-group chat-scroll py-3 ps">
+
+      <!---->
+      <ng-template ngFor let-user [ngForOf]="users | namePipe:selectName" let-userIndex="index">
+        <a class="list-group-item list-group-item-action " [ngClass]="getCurrentClass(user)" href="javascript:void(0)"
+          (click)="chatClick(user)">
+          <img alt="" class="d-block ui-w-40 rounded-circle" *ngIf="!user.user.icon" src="/assets/img/user/01.jpg">
+          <img alt="" class="d-block ui-w-40 rounded-circle" *ngIf="user.user.icon" [src]="user.user.icon">
+          <div class="media-body ml-3">
+            {{user.user.fullName}}
+            <!---->
+            <div class="chat-status small" *ngIf="user.online">
+              <span class="badge badge-dot"></span>&nbsp; {{'Chat.Online' | translate}}
+
+            </div>
+            <div class="chat-status small" *ngIf="!user.online">
+
+              <span class="badge badge-dot"></span>&nbsp; {{'Chat.Offline' | translate}}
+            </div>
+            <!---->
+          </div>
+          <ng-template [ngIf]="!user.isFollow">
+            <button nz-button class="btn btn-success btn-oval"  [nzLoading]="user.isSave" (click)="follow(user);$event.stopPropagation()">{{'Followers.Follow'
+              | translate}}</button>
+          </ng-template>
+          <div class="badge badge-outline-success" *ngIf="user.badge>0">{{user.badge}}</div>
+          <!---->
+        </a>
+      </ng-template>
+
+
+
+    </div>
+  </div>
+
+</div>

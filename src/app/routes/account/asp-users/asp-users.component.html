@@ -1,0 +1,75 @@
+<div class="content-heading">{{'ASPUsers' | translate}}</div>
+
+
+<div class="card card-default" [@routerTransition]>
+    <div class="card-body">
+        <div style="text-align:right" class="card-top-button">
+            <ng-template [ngIf]="isTableLoading">
+                <button nz-button nzLoading nzType="primary" nzShape="circle"></button>
+            </ng-template>
+
+            <button nz-button nzType="default" (click)="refresh();"><i class="anticon anticon-sync"></i>{{'Base.Refresh'|translate}}</button>
+            <ng-template [ngIf]="isGranted('Pages.AspUsers.Add')">
+                <button nz-button nzType="primary" (click)="createUser();"><i class="anticon anticon-plus"></i>{{'Base.Create'|translate}}</button>
+
+            </ng-template>
+
+        </div>
+        <div class="table-responsive">
+            <table datatable="" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{l('UserId')}}</th>
+                        <th>{{l('FullName')}}</th>
+                        <th>{{l('EmailAddress')}}</th>
+                        <th>{{l('Country')}}</th>
+                        <th>{{l('Role')}}</th>
+                        <th>
+                            <div style="text-align:center">{{l('IsActive')}}</div>
+                        </th>
+                        <th *ngIf="grantedNum>0">{{l('Actions')}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
+                        <td>{{user.userName}}</td>
+                        <td>{{user.fullName}}</td>
+                        <td>{{user.emailAddress}}</td>
+                        <td>{{getTransString(user.country)}}</td>
+                        <td>
+                            <nz-tag [nzColor]="'#2db7f5'">{{user.roleNames[0]}}</nz-tag>
+                        </td>
+                        <td style="text-align:center">
+                            <ng-template [ngIf]="user.isActive">
+                                <a class="mr-1 badge badge-primary" href="javascript:void(0)">{{'Active'|translate}}</a>
+                            </ng-template>
+                            <ng-template [ngIf]="!user.isActive">
+                                <a class="mr-1 badge badge-danger" href="javascript:void(0)">{{'Not Active'|translate}}</a>
+                            </ng-template>
+
+
+
+                        </td>
+                        <td class="dropdown" *ngIf="grantedNum>0">
+                            <button class="btn btn-sm btn-secondary" type="button" (click)="editUser(user)" *ngIf="isGranted('Pages.AspUsers.Edit')">
+                                <em class="fas fa-pencil-alt"></em>
+                            </button>
+                            <button class="btn btn-sm btn-danger" (click)="delete(user)" type="button" *ngIf="isGranted('Pages.AspUsers.Delete')">
+                                <em class="fas fa-trash-alt"></em>
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-align: center;" *ngIf="totalItems > pageSize">
+
+                <pagination-controls style="text-align:center" (pageChange)="getDataPage($event)" id="server"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-create-asp-user #createUserModal (modalSave)="refresh()"></app-create-asp-user>
+<app-edit-asp-user #editUserModal (modalSave)="refresh()"></app-edit-asp-user>

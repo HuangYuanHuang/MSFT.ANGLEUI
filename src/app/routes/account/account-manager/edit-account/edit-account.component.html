@@ -1,0 +1,35 @@
+<nz-modal [(nzVisible)]="isVisible" [nzFooter]="null" nzTitle="Edit Account" [nzWidth]="800" (nzOnCancel)="handleCancel()">
+  <form *ngIf="account" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="displayName">DisplayName</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input type="text" nz-input formControlName="displayName" placeholder="DisplayName" [(ngModel)]="account.displayName">
+        <nz-form-explain *ngIf="validateForm.get('displayName').dirty && validateForm.get('displayName').errors">Please input DisplayName!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input type="email" nz-input formControlName="email" placeholder="Email" [(ngModel)]="account.email">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="role">Liscence </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-radio-group formControlName="liscence" [(ngModel)]="account.liscence">
+          <label nz-radio [nzValue]="">NONE</label>
+          <label nz-radio [nzValue]="item.type" [nzDisabled]="item.maxCount<=item.useCount" *ngFor="let item of liscenceNodes">{{item.type}}
+            <span class="label label-primary">{{item.maxCount-item.useCount}}</span>
+          </label>
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="modal-footer">
+      <button nz-button [disabled]="saving" type="button" (click)="handleCancel()"> {{l("Cancel")}}</button>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid"> {{l("Save")}}</button>
+
+    </div>
+  </form>
+
+</nz-modal>

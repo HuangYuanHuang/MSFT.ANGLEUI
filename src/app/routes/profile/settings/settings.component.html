@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card b">
+                <div class="card-header bg-gray-lighter text-bold">{{'Settings.PersonalSettings'|translate}}</div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item" (click)="settingActive=1" [ngClass]="{'active': (settingActive == 1)}">{{'Settings.Image'|translate}}</a>
+                    <a href="#" class="list-group-item" (click)="settingActive=2" [ngClass]="{'active': (settingActive == 2)}">{{'Settings.Account'|translate}}</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div *ngIf="settingActive == 1">
+                <div class="card b">
+                    <div class="card-header bg-gray-lighter text-bold">{{'Settings.Image'|translate}}</div>
+                    <div class="card-body">
+                        <form action="">
+                            <ng-template [ngIf]="isLoadCropper">
+                                <app-cropper #cropper (croppedEvent)="croppedEvent($event)"></app-cropper>
+
+                            </ng-template>
+
+                            <button nz-button nzType="primary" [disabled]="!isImageLoad" [nzLoading]="isUploadAccount" (click)="UploadImage()">{{'Settings.UpdateImage'|translate}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="settingActive == 2">
+                <div class="card b">
+                    <div class="card-header bg-gray-lighter text-bold">{{'Settings.Account'|translate}}</div>
+                    <div class="card-body">
+                        <form action="">
+                            <div class="form-group">
+                                <label>{{'Settings.Email'|translate}}</label>
+                                <input class="form-control" name="userEmail" type="email" [ngModel]="currentUser.emailAddress"
+                                    readonly />
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Settings.Bio'|translate}}</label>
+                                <textarea class="form-control" name="bio" [(ngModel)]="currentUser.bio" rows="3"></textarea>
+                            </div>
+                            <button nz-button nzType="primary" [nzLoading]="isUploadAccount" (click)="UploadAccount()">{{'Settings.UpdateAccount'|translate}}</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

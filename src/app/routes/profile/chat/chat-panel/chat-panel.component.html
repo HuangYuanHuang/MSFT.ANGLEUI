@@ -1,0 +1,103 @@
+<div class="d-flex col flex-column">
+
+
+  <div class="flex-grow-0 py-3 pr-4 pl-lg-4">
+
+    <div class="media align-items-center">
+      <a class="chat-sidebox-toggler d-lg-none d-block text-muted text-large px-4 mr-2" href="javascript:void(0)">
+        <i class="ion ion-md-more"></i>
+      </a>
+
+      <div class="position-relative">
+        <img alt="" class="ui-w-40 rounded-circle" *ngIf="!currentUser.icon" src="/assets/img/user/01.jpg">
+        <img alt="" class="ui-w-40 rounded-circle" *ngIf="currentUser.icon" [src]="currentUser.icon">
+      </div>
+      <div class="media-body pl-3">
+        <strong>{{currentUser.fullName}}</strong>
+        <!-- <div class="text-muted small">
+            <em>Typing...</em>
+          </div> -->
+      </div>
+      <div *ngIf="chatModel">
+        <button class="btn btn-primary btn-round icon-btn mr-1" type="button" *ngIf="chatModel.online&&!isMediaChat"
+          (click)="chatAudio()">
+          <i class="icon-phone "></i>
+        </button>
+        <button class="btn btn-primary btn-round icon-btn mr-1" type="button" (click)="chatVideo()" *ngIf="chatModel.online&&!isMediaChat">
+          <i class="fas fa-video"></i>
+        </button>
+        <button class="btn btn-default btn-round icon-btn" type="button">
+          <i class="icon-options"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <hr class="flex-grow-0 border-light m-0">
+
+
+
+  <div class="flex-grow-1 position-relative">
+
+
+    <div class="chat-messages chat-scroll p-4 ps" id="m-message">
+      <ng-template ngFor let-item [ngForOf]="messageNodes" let-itemIndex="index">
+        <ng-template [ngIf]="item.messageType==8">
+          <!-- <div class="system-time">
+            <p>{{item.creationTime | amLocal | amDateFormat: 'MM-DD
+              HH:mm'}}</p>
+          </div> -->
+          <div class="system-message">
+
+            <p *ngIf="getSelf(item)"> <span>{{item.message}} </span></p>
+            <p *ngIf="!getSelf(item)"> <span>{{item.message}} </span></p>
+          </div>
+        </ng-template>
+
+        <ng-template [ngIf]="item.messageType==1">
+          <div class="mb-4 chat-message-right" *ngIf="getSelf(item)">
+            <div>
+              <img alt="" class="ui-w-40 rounded-circle" *ngIf="!selfUser.icon" src="/assets/img/user/01.jpg">
+              <img alt="" class="ui-w-40 rounded-circle" *ngIf="selfUser.icon" [src]="selfUser.icon">
+              <div class="text-muted small text-nowrap mt-2">{{item.creationTime | amLocal | amDateFormat: 'MM-DD
+                HH:mm'}}</div>
+            </div>
+            <div class="flex-shrink-1 bg-lighter rounded py-2 px-3 mr-3">
+              <div class="font-weight-semibold mb-1"><strong>{{'Chat.Self' | translate}}</strong></div>
+              {{item.message}}
+            </div>
+          </div>
+          <div class="mb-4 chat-message-left" *ngIf="!getSelf(item)">
+            <div>
+              <img alt="" class="ui-w-40 rounded-circle" *ngIf="!currentUser.icon" src="/assets/img/user/01.jpg">
+              <img alt="" class="ui-w-40 rounded-circle" *ngIf="currentUser.icon" [src]="currentUser.icon">
+              <div class="text-muted small text-nowrap mt-2">{{item.creationTime| amLocal | amDateFormat: 'MM-DD HH:mm'
+                }}</div>
+            </div>
+            <div class="flex-shrink-1 bg-lighter rounded py-2 px-3 ml-3">
+              <div class="font-weight-semibold mb-1"> <strong>{{currentUser.name}}</strong></div>
+              {{item.message}}
+            </div>
+          </div>
+        </ng-template>
+      </ng-template>
+      <!---->
+
+    </div>
+  </div>
+
+
+  <hr class="border-light m-0">
+  <div class="flex-grow-0 py-3 px-4">
+    <div class="input-group">
+      <textarea name="messageContext" nz-input rows="4" [(ngModel)]="messageText" (keyup.enter)="sendMessage()"
+        aria-label="With textarea" class="form-control" placeholder="{{'Chat.TypeMessage' | translate}}"></textarea>
+
+      <!-- <div class="input-group-append">
+          <button class="btn btn-primary" type="button">Send</button>
+        </div> -->
+    </div>
+  </div>
+
+
+</div>

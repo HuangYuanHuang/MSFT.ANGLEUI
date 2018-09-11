@@ -1,0 +1,78 @@
+.icon-btn {
+    width: calc(2.25276rem + 2px) !important;
+    padding: 0;
+    line-height: 2.25276rem;
+}
+
+.btn-round {
+    border-radius: 60rem !important;
+}
+
+.btn {
+    font-size: .894rem;
+}
+
+.btn-secondary {
+    border-color: transparent;
+    background: #8897AA;
+    color: #fff;
+}
+
+.system-time {
+    background-color: rgba(24, 28, 33, 0.03);
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.system-message {
+    background-color: rgba(24, 28, 33, 0.03);
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.chat-message-left,
+.chat-message-right {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+
+.chat-message-right {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    margin-left: auto;
+}
+
+.bg-lighter {
+    background-color: rgba(24, 28, 33, 0.03) !important;
+}
+
+.rounded {
+    border-radius: .25rem !important;
+}
+
+.flex-column {
+    background: #fff;
+    -webkit-box-shadow: 0 0 0 1px rgba(24, 28, 33, .06);
+    box-shadow: 0 0 0 1px rgba(24, 28, 33, .06);
+}
+
+.ui-w-40 {
+    width: 50px !important;
+    height: auto;
+}
+
+.chat-scroll {
+    height: 540px;
+    overflow-y: auto;
+}
+
+.font-weight-semibold {
+    font-weight: 500 !important;
+}

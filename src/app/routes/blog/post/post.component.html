@@ -1,0 +1,176 @@
+<div class="row">
+    <!-- Blog Content-->
+    <div class="col-xl-9">
+        <div class="card card-default" *ngIf="newInfo">
+            <div class="card-header">
+                <div class="bb">
+                    <h2 class="text-lg">{{newInfo.title}}</h2>
+                    <p class="clearfix">
+                        <span class="float-left">
+                            <small class="mr-sm">
+                                <a href="">{{newInfo.creationUserName}}</a>
+                            </small>
+                            <small class="mr-sm" style="margin-left:10px">{{newInfo.creationTime | amLocal |
+                                amDateFormat: 'YYYY-MM-DD HH:mm'}}</small>
+
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="card-body text-md">
+                <div [innerHTML]="catcha"></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">3 {{'News.Comments' | translate}}</div>
+            <div class="card-body">
+                <div class="media">
+                    <img class="mr-3 rounded-circle thumb64" src="assets/img/user/01.jpg" />
+                    <div class="media-body">
+                        <h4 id="media-heading">
+                            <a href="">Susan Grant</a>
+                            <small>10 min</small>
+                        </h4>
+                        <p>Donec ac massa tortor. In hac habitasse platea dictumst. Nam blandit fringilla faucibus.
+                            Lorem ipsum
+                            dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget metus semper congue.</p>
+                        <p>Fusce ullamcorper placerat tortor, placerat consequat diam cursus posuere.</p>
+                    </div>
+                </div>
+                <hr />
+                <div class="media">
+                    <img class="mr-3 rounded-circle thumb64" src="assets/img/user/03.jpg" />
+                    <div class="media-body mb-3">
+                        <h4 id="media-heading">
+                            <a href="">Dustin Dunn</a>
+                            <small>20 min</small>
+                        </h4>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                        commodo.
+                        Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+                        nisi
+                        vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <hr />
+                        <div class="media">
+                            <img class="mr-3 rounded-circle thumb64" src="assets/img/user/06.jpg" />
+                            <div class="media-body">
+                                <h4 id="nested-media-heading">
+                                    <a href="">Marcus Gomez</a>
+                                    <small>1 hour</small>
+                                </h4>Integer ac nisl et urna gravida malesuada. Vivamus fermentum libero vel felis
+                                aliquet interdum.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <em class="fas fa-pencil-alt mr-2"></em>{{'News.AddComment' | translate}}</div>
+            <div class="card-body">
+                <form class="form-horizontal" action="/">
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <input class="form-control" id="post-firstname" type="text" name="post-firstname"
+                                placeholder="{{'News.Yourfirstname' | translate}}" />
+                        </div>
+                        <div class="col-6">
+                            <input class="form-control" id="post-lastname" type="text" name="post-lastname" placeholder="{{'News.Yourlastname' | translate}}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <textarea class="form-control" id="post-comment" name="post-comment" rows="4" placeholder="{{'News.Commenthere' | translate}}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="button">{{'News.SendComment' | translate}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Sidebar-->
+    <div class="col-xl-3">
+        <div class="row">
+            <div class="col-12">
+                <!-- Search-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.Search' | translate}}</div>
+                    <div class="card-body">
+                        <form class="form-horizontal">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="{{'News.Search' | translate}}" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button">
+                                        <em class="fa fa-search"></em>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xl-12">
+                <!-- Categories-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.Categories' | translate}}</div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <em class="fa fa-angle-right fa-fw"></em>All</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <em class="fa fa-angle-right fa-fw"></em>Top story</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <em class="fa fa-angle-right fa-fw"></em>News</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <em class="fa fa-angle-right fa-fw"></em>Mark your Agenda</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <em class="fa fa-angle-right fa-fw"></em>Arts Contest</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <em class="fa fa-angle-right fa-fw"></em>Schools Celebrating</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <em class="fa fa-angle-right fa-fw"></em>Essential Reading</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xl-12">
+                <!-- Tag Cloud-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.TagCloud' | translate}}</div>
+                    <div class="card-body">
+                        <div jqcloud class="mw-100" [words]="words" [width]="240" [height]="200" [steps]="7"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-xl-12">
+                <!-- Ads-->
+                <div class="card card-default">
+                    <div class="card-header">{{'News.Ads' | translate}}</div>
+                    <div class="card-body">
+                        <a href="">
+                            <img class="img-fluid img-thumbnail" src="assets/img/mockup.png" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

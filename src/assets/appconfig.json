@@ -1,0 +1,5 @@
+{
+  "remoteServiceBaseUrl": "http://localhost:21021",
+  "_remoteServiceBaseUrl": "https://unescoedu.hyhrobot.com:5010",
+  "appBaseUrl": "http://localhost:4200"
+}

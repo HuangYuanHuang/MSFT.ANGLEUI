@@ -1,0 +1,32 @@
+<div class="image-cropper-container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">{{'Cropper.SelectFile'|translate}}</div>
+                <div class="card-body">
+                    <label for="image-input" class="file-upload">
+                        <button class="btn btn-secondary btn-block">{{'Cropper.UploadImage'|translate}}</button>
+                        <input id="image-input" type="file" (change)="fileChangeListener($event)">
+                    </label>
+                    <p class="pv">{{'Cropper.Croptype'|translate}}:</p>
+                    <div class="btn-group btn-group-justified mb">
+                        <!-- <label class="btn btn-secondary" (click)="setRoundedMethod(false)" [class.active]="!cropperSettings.rounded">Square</label> -->
+                        <label class="btn btn-secondary" (click)="setRoundedMethod(true)" [class.active]="cropperSettings.rounded">{{'Cropper.Circle'|translate}}</label>
+                    </div>
+                    <div class="result" *ngIf="data1.image">
+                        <p class="pv">{{'Cropper.Croppedimage'|translate}}</p>
+                        <img class="img-fluid img-thumbnail" [class.rounded-circle]="cropperSettings.rounded" [src]="data1.image"
+                            [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <img-cropper #cropper [image]="data1" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

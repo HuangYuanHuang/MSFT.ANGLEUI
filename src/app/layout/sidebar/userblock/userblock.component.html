@@ -1,0 +1,14 @@
+<div class="item user-block" *ngIf="userBlockIsVisible()">
+    <!-- User picture-->
+    <div class="user-block-picture">
+        <div class="user-block-status" *ngIf="user">
+            <img class="img-thumbnail rounded-circle" [src]="user.icon" alt="Avatar" (click)="setting()" />
+            <div class="circle bg-success circle-lg"></div>
+        </div>
+    </div>
+    <!-- Name and Job-->
+    <div class="user-block-info" *ngIf="user">
+        <span class="user-block-name">{{user.fullName}}</span>
+        <span class="user-block-role" *ngIf="user.roleNames">{{user.mark||user.roleNames[0]}}</span>
+    </div>
+</div>
